@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 """
-The Classification class will be used to build and use a model to classify data Y based on data X.
+The MultipleLogisticRegression class will be used to build and use a model to classify data Y based on data X.
 """
-class Classification:
+class MultipleLogisticRegression:
   """
-  The __init__ method will be used to initialize the Classification object.
+  The __init__ method will be used to initialize the MultipleLogisticRegression object.
 
   The x_csv_path parameter is a string that represents the path to the CSV file that contains the X data.
   The y_csv_path parameter is a string that represents the path to the CSV file that contains the Y data.

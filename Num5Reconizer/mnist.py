@@ -24,7 +24,7 @@ def prepend_bias(X):
   return np.insert(X, 0, 1, axis=1)
 
 def encode_fives(Y):
-  return (Y == 5).astype(np.int)
+  return (Y == 5).astype(np.int) # 1 if the label is 5, 0 otherwise
 
 print('Loading MNIST X_train...')
 X_train = prepend_bias(load_images('mnist/train-images-idx3-ubyte.gz'))
