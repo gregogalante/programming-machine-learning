@@ -23,8 +23,8 @@ def load_images(filename):
 def prepend_bias(X):
   return np.insert(X, 0, 1, axis=1)
 
-def encode_fives(Y):
-  return (Y == 5).astype(np.int) # 1 if the label is 5, 0 otherwise
+def encode_n(Y, n):
+  return (Y == n).astype(np.int) # 1 if the label is 5, 0 otherwise
 
 print('Loading MNIST X_train...')
 X_train = prepend_bias(load_images('mnist/train-images-idx3-ubyte.gz'))
@@ -34,10 +34,16 @@ print('Loading MNIST X_test...')
 X_test = prepend_bias(load_images('mnist/t10k-images-idx3-ubyte.gz'))
 print(X_test.shape)
 
-print('Loading MNIST Y_train...')
-Y_train = encode_fives(load_labels('mnist/train-labels-idx1-ubyte.gz'))
-print(Y_train.shape)
+Y_trains = []
+Y_tests = []
+for i in range(10):
+  print('Loading MNIST Y_train({i})...')
+  Y_train = encode_n(load_labels('mnist/train-labels-idx1-ubyte.gz'), i)
+  print(Y_train.shape)
+  Y_trains.append(Y_train)
 
-print('Loading MNIST Y_test...')
-Y_test = encode_fives(load_labels('mnist/t10k-labels-idx1-ubyte.gz'))
-print(Y_test.shape)
+  print('Loading MNIST Y_test({i})...')
+  Y_test = encode_n(load_labels('mnist/t10k-labels-idx1-ubyte.gz'), i)
+  print(Y_test.shape)
+  Y_tests.append(Y_test)
+
