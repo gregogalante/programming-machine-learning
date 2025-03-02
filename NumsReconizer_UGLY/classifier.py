@@ -14,9 +14,7 @@ class Classifier:
     return self._sigmoid(weighted_sum)
   
   def _classify(self, X, w):
-    y_hat = self._forward(X, w)
-    labels = np.argmax(y_hat, axis=1)
-    return labels.reshape(-1, 1)
+    return np.round(self._forward(X, w))
   
   def _loss(self, X, Y, w):
     y_hat = self._forward(X, w)
@@ -26,9 +24,9 @@ class Classifier:
   
   def _gradient(self, X, Y, w):
     return np.matmul(X.T, (self._forward(X, w) - Y)) / X.shape[0]
-
+  
   def train(self, learning_rate=1e-5, epochs=100):
-    w = np.zeros((self.X.shape[1], self.Y.shape[1]))
+    w = np.zeros((self.X.shape[1], 1))
     for i in range(epochs):
       w -= learning_rate * self._gradient(self.X, self.Y, w)
       if i % 10 == 0:
