@@ -99,7 +99,7 @@ def train_model(model, dataset, epochs=10, batch_size=32, lr=0.001):
         print(f"Epoch {epoch+1}/{epochs}, Loss: {total_loss/len(dataloader):.4f}")
         
         if (epoch + 1) % 5 == 0 or epoch == 0:
-            sample_text = model.generate_text(dataset, "Stone", length=50)
+            sample_text = model.generate_text(dataset, "Inferno", length=50)
             print(f"Sample text: {sample_text}")
     
     return model
@@ -108,7 +108,7 @@ def create_model():
     sample_text = ''
 
     print("Loading text...")
-    with open("harry-potter.txt", "r") as f:
+    with open("divina-commedia.txt", "r") as f:
         sample_text += f.read()
 
     print("Preprocessing text...")
@@ -124,14 +124,14 @@ def create_model():
     generated_text = trained_model.generate_text(dataset, "The wizard", length=150, temperature=0.8)
     print(generated_text)
     print("Saving model...")
-    save_model(trained_model, dataset, "harry-potter-model")
+    save_model(trained_model, dataset, "divina-commedia-model")
     
     return True
 
 if __name__ == "__main__":
     # create_model()
     
-    model, dataset_info = load_model("harry-potter-model")
+    model, dataset_info = load_model("divina-commedia-model")
     text_gen = TextGenerator(model, dataset_info, device=device)
-    text = text_gen.generate_text("The wizard", length=150, temperature=0.8)
+    text = text_gen.generate_text("Nel mezzo", length=150, temperature=0.8)
     print(text)
