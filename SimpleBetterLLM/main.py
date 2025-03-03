@@ -99,7 +99,7 @@ def train_model(model, dataset, epochs=10, batch_size=32, lr=0.001):
         print(f"Epoch {epoch+1}/{epochs}, Loss: {total_loss/len(dataloader):.4f}")
         
         if (epoch + 1) % 5 == 0 or epoch == 0:
-            sample_text = model.generate_text(dataset, "Inferno", length=50)
+            sample_text = model.generate_text(dataset, "Nel mezzo", length=50)
             print(f"Sample text: {sample_text}")
     
     return model
@@ -120,9 +120,6 @@ def create_model():
     model = SimpleLLM(vocab_size=dataset.vocab_size, embedding_dim=48, hidden_dim=96, device=device)
     print("Training model...")
     trained_model = train_model(model, dataset, epochs=50, batch_size=16, lr=0.001)
-    print("Testing model...")
-    generated_text = trained_model.generate_text(dataset, "The wizard", length=150, temperature=0.8)
-    print(generated_text)
     print("Saving model...")
     save_model(trained_model, dataset, "divina-commedia-model")
     
